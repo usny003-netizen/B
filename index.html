@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ระบบช่วยลดความเครียด</title>
+
+<style>
+body{
+    margin:0;
+    background:#111;
+    color:#00ff66;
+    font-family:monospace;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    overflow:hidden;
+}
+
+.box{
+    width:90%;
+    max-width:500px;
+    text-align:center;
+    background:#1a1a1a;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 0 20px #00ff66;
+}
+
+h1{
+    margin-bottom:20px;
+}
+
+#text{
+    min-height:100px;
+    font-size:20px;
+    line-height:1.8;
+    white-space:pre-line;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 25px;
+    border:none;
+    border-radius:30px;
+    background:#00cc66;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#00aa55;
+}
+</style>
+
+</head>
+<body>
+
+<div class="box">
+
+<h1>🤖 ระบบช่วยลดความเครียด</h1>
+
+<div id="text">
+กดปุ่มเพื่อเริ่มวิเคราะห์...
+</div>
+
+<button onclick="start()">เริ่มสแกน</button>
+
+</div>
+
+<script>
+
+const messages = [
+"🔍 กำลังวิเคราะห์ระดับความเครียด...",
+"📊 พบว่าช่วงนี้เหนื่อยมาก...",
+"🧠 ระบบกำลังค้นหาวิธีเยียวยา...",
+"🍽️ วิเคราะห์เมนูที่เหมาะสม...",
+"✅ ผลลัพธ์ออกแล้ว!",
+"",
+"💖 ระบบแนะนำว่า...",
+"",
+"ไปกินหมูกระทะกับเรามั้ย 😊",
+"เราขอเลี้ยงก็ได้",
+"หรือแค่ออกไปนั่งคุยกันก็พอ ❤️"
+];
+
+let i = 0;
+
+function start(){
+
+    document.querySelector("button").disabled = true;
+    document.getElementById("text").innerHTML = "";
+
+    i = 0;
+
+    let timer = setInterval(()=>{
+
+        document.getElementById("text").innerHTML += messages[i] + "\n";
+
+        i++;
+
+        if(i >= messages.length){
+            clearInterval(timer);
+        }
+
+    },1000);
+
+}
+
+</script>
+
+</body>
+</html>
