@@ -3,30 +3,273 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบช่วยลดความเครียด</title>
+    <title>🐾 ระบบเช็กลิสต์ยันยอดทรัพย์สินสุดน่ารัก</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #FFFDF9;
+            --card-bg: #FFFFFF;
+            --pink-soft: #FFD1DC;
+            --pink-accent: #FF85A1;
+            --mint-green: #E8F5E9;
+            --mint-accent: #2E7D32;
+            --yellow-soft: #FFFDE7;
+            --yellow-accent: #F57F17;
+            --text-color: #374151;
+            --border-radius: 20px;
+        }
 
-    <!-- เชื่อม CSS -->
-    <link rel="stylesheet" href="style.css">
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-color);
+            margin: 0;
+            padding: 24px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #FFB7B2, #FFDAC1);
+            padding: 28px;
+            border-radius: var(--border-radius);
+            color: #4A3E3D;
+            box-shadow: 0 10px 25px rgba(255, 183, 178, 0.35);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header h1 { margin: 0; font-size: 24px; display: flex; align-items: center; gap: 10px; }
+        .header .date-badge { background: rgba(255, 255, 255, 0.75); padding: 8px 18px; border-radius: 50px; font-size: 14px; font-weight: 600; color: #5D4037; }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .stat-card:hover { transform: translateY(-4px); }
+        .stat-card.match { border-color: #A5D6A7; background: #F1F8E9; }
+        .stat-card.diff1 { border-color: #FFE082; background: #FFFDE7; }
+        .stat-card.diff2 { border-color: #FFAB91; background: #FBE9E7; }
+
+        .stat-card .number { font-size: 32px; font-weight: bold; margin: 6px 0; }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 280px;
+            padding: 14px 22px;
+            border: 2px solid #E5E7EB;
+            border-radius: 50px;
+            font-size: 15px;
+            outline: none;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        .search-box:focus { border-color: var(--pink-accent); }
+
+        .filter-btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 50px;
+            background: #F3F4F6;
+            color: #4B5563;
+            font-family: inherit;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn.active {
+            background: var(--pink-accent);
+            color: white;
+            box-shadow: 0 4px 12px rgba(255, 133, 161, 0.4);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+        }
+
+        .data-table th {
+            background: #F9FAFB;
+            padding: 14px 18px;
+            text-align: left;
+            font-weight: 600;
+            color: #6B7280;
+            border-radius: 12px;
+        }
+
+        .data-table tr.row-card {
+            background: var(--card-bg);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            border-radius: 14px;
+            transition: transform 0.15s ease;
+        }
+
+        .data-table tr.row-card:hover { transform: scale(1.005); }
+
+        .data-table td {
+            padding: 16px 18px;
+            border-top: 1px solid #F3F4F6;
+            border-bottom: 1px solid #F3F4F6;
+        }
+
+        .data-table td:first-child { border-left: 1px solid #F3F4F6; border-top-left-radius: 14px; border-bottom-left-radius: 14px; }
+        .data-table td:last-child { border-right: 1px solid #F3F4F6; border-top-right-radius: 14px; border-bottom-right-radius: 14px; }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .badge-success { background: #DCFCE7; color: #15803D; }
+        .badge-warning { background: #FEF3C7; color: #B45309; }
+        .badge-danger { background: #FEE2E2; color: #B91C1C; }
+
+        .checkbox-custom {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--pink-accent);
+        }
+    </style>
 </head>
-
 <body>
 
 <div class="container">
-
-    <h1>🤖 ระบบช่วยลดความเครียด</h1>
-
-    <div id="text">
-        กดปุ่มเพื่อเริ่มวิเคราะห์...
+    <div class="header">
+        <h1>🐾 รายการยันยอดทรัพย์สินสุดน่ารัก</h1>
+        <div class="date-badge">📅 ณ วันที่ 6 ต.ค. 2569</div>
     </div>
 
-    <button id="startBtn" onclick="start()">
-        เริ่มสแกน
-    </button>
+    <!-- Cards Summary -->
+    <div class="stats-grid">
+        <div class="stat-card match">
+            <div>✅ ยอดตรงกัน</div>
+            <div class="number" style="color: var(--mint-accent);">20</div>
+            <small>รายการถูกต้องแล้ว</small>
+        </div>
+        <div class="stat-card diff1">
+            <div>⚠️ ไม่ตรง 1 อย่าง</div>
+            <div class="number" style="color: var(--yellow-accent);">7</div>
+            <small>ต้องตรวจสอบเพิ่มเติม</small>
+        </div>
+        <div class="stat-card diff2">
+            <div>❌ ไม่ตรง 2 อย่าง</div>
+            <div class="number" style="color: #D32F2F;">1</div>
+            <small>รายการเร่งด่วน</small>
+        </div>
+    </div>
 
+    <!-- Controls Filter -->
+    <div class="controls">
+        <input type="text" id="searchInput" class="search-box" placeholder="🔍 พิมพ์เพื่อค้นหาหน่วยงาน หรือ รายการครุภัณฑ์...">
+        <button class="filter-btn active" onclick="filterData('all')">ทั้งหมด</button>
+        <button class="filter-btn" onclick="filterData('issue')">⚠️ เฉพาะรายการมีปัญหา</button>
+    </div>
+
+    <!-- Table -->
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th style="width: 50px;">ตรวจ</th>
+                <th>หน่วยงาน / สินทรัพย์</th>
+                <th>รายละเอียดรายการ</th>
+                <th>จำนวน (บาท)</th>
+                <th>หมายเหตุ / สถานะ</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            <tr class="row-card" data-status="issue">
+                <td><input type="checkbox" class="checkbox-custom"></td>
+                <td><b>🏫 รร.นครนนท์วิทยา 1 วัดท้ายเมือง*</b></td>
+                <td>📺 ครุภัณฑ์โฆษณาและเผยแพร่</td>
+                <td>96,800</td>
+                <td><span class="badge badge-warning">📌 รับเพิ่ม 69</span></td>
+            </tr>
+            <tr class="row-card" data-status="issue">
+                <td><input type="checkbox" class="checkbox-custom"></td>
+                <td><b>🏫 รร.นครนนท์วิทยา 4 วัดบางแพรกเหนือ*</b></td>
+                <td>🗄️ ครุภัณฑ์สำนักงาน</td>
+                <td>1,169,117</td>
+                <td><span class="badge badge-warning">📌 รับเพิ่ม 69</span></td>
+            </tr>
+            <tr class="row-card" data-status="issue">
+                <td><input type="checkbox" class="checkbox-custom"></td>
+                <td><b>🏫 รร.กีฬานครนนท์วิทยา 6*</b></td>
+                <td>🏢 อาคารเพื่อประโยชน์อื่น</td>
+                <td style="color: #E63946; font-weight: 600;">-28,176</td>
+                <td><span class="badge badge-danger">⚠️ ปรับปรุง JV-00158/69</span></td>
+            </tr>
+            <tr class="row-card" data-status="ok">
+                <td><input type="checkbox" class="checkbox-custom" checked></td>
+                <td><b>👶 สพด.นครนนท์ 1 วัดท้ายเมือง</b></td>
+                <td>-</td>
+                <td>-</td>
+                <td><span class="badge badge-success">✅ ยอดตรงกัน</span></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
-<!-- เชื่อม JavaScript -->
-<script src="script.js"></script>
+<script>
+    // Search Function
+    document.getElementById('searchInput').addEventListener('keyup', function() {
+        let value = this.value.toLowerCase();
+        let rows = document.querySelectorAll('#tableBody tr');
+        rows.forEach(row => {
+            let text = row.innerText.toLowerCase();
+            row.style.display = text.includes(value) ? '' : 'none';
+        });
+    });
+
+    // Filter Function
+    function filterData(type) {
+        let buttons = document.querySelectorAll('.filter-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+
+        let rows = document.querySelectorAll('#tableBody tr');
+        rows.forEach(row => {
+            if (type === 'all') {
+                row.style.display = '';
+            } else if (type === 'issue') {
+                row.style.display = row.getAttribute('data-status') === 'issue' ? '' : 'none';
+            }
+        });
+    }
+</script>
 
 </body>
 </html>
