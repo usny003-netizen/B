@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🐾 ระบบเช็กลิสต์ยันยอดทรัพย์สินสุดน่ารัก</title>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-main: #FFFDF9;
@@ -28,7 +28,7 @@
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
@@ -46,33 +46,33 @@
             gap: 15px;
         }
 
-        .header h1 { margin: 0; font-size: 24px; display: flex; align-items: center; gap: 10px; }
-        .header .date-badge { background: rgba(255, 255, 255, 0.75); padding: 8px 18px; border-radius: 50px; font-size: 14px; font-weight: 600; color: #5D4037; }
+        .header h1 { margin: 0; font-size: 22px; display: flex; align-items: center; gap: 10px; }
+        .header .date-badge { background: rgba(255, 255, 255, 0.85); padding: 8px 18px; border-radius: 50px; font-size: 14px; font-weight: 600; color: #5D4037; }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 16px;
-            margin-bottom: 25px;
+        .tab-menu {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
         }
 
-        .stat-card {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: var(--border-radius);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-            text-align: center;
-            border: 2px solid transparent;
-            transition: all 0.2s ease;
+        .tab-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 50px;
+            background: #E5E7EB;
+            color: #4B5563;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 600;
             cursor: pointer;
+            transition: all 0.2s;
         }
 
-        .stat-card:hover { transform: translateY(-4px); }
-        .stat-card.match { border-color: #A5D6A7; background: #F1F8E9; }
-        .stat-card.diff1 { border-color: #FFE082; background: #FFFDE7; }
-        .stat-card.diff2 { border-color: #FFAB91; background: #FBE9E7; }
-
-        .stat-card .number { font-size: 32px; font-weight: bold; margin: 6px 0; }
+        .tab-btn.active {
+            background: var(--pink-accent);
+            color: white;
+            box-shadow: 0 4px 14px rgba(255, 133, 161, 0.4);
+        }
 
         .controls {
             display: flex;
@@ -95,24 +95,6 @@
 
         .search-box:focus { border-color: var(--pink-accent); }
 
-        .filter-btn {
-            padding: 12px 20px;
-            border: none;
-            border-radius: 50px;
-            background: #F3F4F6;
-            color: #4B5563;
-            font-family: inherit;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .filter-btn.active {
-            background: var(--pink-accent);
-            color: white;
-            box-shadow: 0 4px 12px rgba(255, 133, 161, 0.4);
-        }
-
         .data-table {
             width: 100%;
             border-collapse: separate;
@@ -120,11 +102,11 @@
         }
 
         .data-table th {
-            background: #F9FAFB;
+            background: #F3F4F6;
             padding: 14px 18px;
             text-align: left;
             font-weight: 600;
-            color: #6B7280;
+            color: #4B5563;
             border-radius: 12px;
         }
 
@@ -135,7 +117,7 @@
             transition: transform 0.15s ease;
         }
 
-        .data-table tr.row-card:hover { transform: scale(1.005); }
+        .data-table tr.row-card:hover { transform: scale(1.002); }
 
         .data-table td {
             padding: 16px 18px;
@@ -158,8 +140,8 @@
         .badge-danger { background: #FEE2E2; color: #B91C1C; }
 
         .checkbox-custom {
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             cursor: pointer;
             accent-color: var(--pink-accent);
         }
@@ -169,106 +151,93 @@
 
 <div class="container">
     <div class="header">
-        <h1>🐾 รายการยันยอดทรัพย์สินสุดน่ารัก</h1>
-        <div class="date-badge">📅 ณ วันที่ 6 ต.ค. 2569</div>
+        <h1>🐾 รายการยันยอดทรัพย์สินระหว่างฐานข้อมูลสินทรัพย์ กับ บัญชี</h1>
+        <div class="date-badge">📅 ณ วันที่ 6/10/69</div>
     </div>
 
-    <!-- Cards Summary -->
-    <div class="stats-grid">
-        <div class="stat-card match">
-            <div>✅ ยอดตรงกัน</div>
-            <div class="number" style="color: var(--mint-accent);">20</div>
-            <small>รายการถูกต้องแล้ว</small>
-        </div>
-        <div class="stat-card diff1">
-            <div>⚠️ ไม่ตรง 1 อย่าง</div>
-            <div class="number" style="color: var(--yellow-accent);">7</div>
-            <small>ต้องตรวจสอบเพิ่มเติม</small>
-        </div>
-        <div class="stat-card diff2">
-            <div>❌ ไม่ตรง 2 อย่าง</div>
-            <div class="number" style="color: #D32F2F;">1</div>
-            <small>รายการเร่งด่วน</small>
-        </div>
+    <div class="tab-menu">
+        <button class="tab-btn active" onclick="switchTab('sub')">🏫 หน่วยงานภายใต้สังกัด (56 รายการ)</button>
+        <button class="tab-btn" onclick="switchTab('parent')">🏢 หน่วยงานแม่ (28 รายการ)</button>
     </div>
 
-    <!-- Controls Filter -->
     <div class="controls">
-        <input type="text" id="searchInput" class="search-box" placeholder="🔍 พิมพ์เพื่อค้นหาหน่วยงาน หรือ รายการครุภัณฑ์...">
-        <button class="filter-btn active" onclick="filterData('all')">ทั้งหมด</button>
-        <button class="filter-btn" onclick="filterData('issue')">⚠️ เฉพาะรายการมีปัญหา</button>
+        <input type="text" id="searchInput" class="search-box" placeholder="🔍 พิมพ์เพื่อค้นหาหน่วยงาน, รายการ หรือหมายเหตุ..." onkeyup="filterData()">
     </div>
 
-    <!-- Table -->
     <table class="data-table">
         <thead>
-            <tr>
-                <th style="width: 50px;">ตรวจ</th>
-                <th>หน่วยงาน / สินทรัพย์</th>
-                <th>รายละเอียดรายการ</th>
+            <tr id="tableHeader">
+                <th style="width: 60px;">เช็ก</th>
+                <th>หน่วยงาน</th>
+                <th>รายละเอียด</th>
                 <th>จำนวน (บาท)</th>
-                <th>หมายเหตุ / สถานะ</th>
+                <th>หมายเหตุ</th>
             </tr>
         </thead>
         <tbody id="tableBody">
-            <tr class="row-card" data-status="issue">
-                <td><input type="checkbox" class="checkbox-custom"></td>
-                <td><b>🏫 รร.นครนนท์วิทยา 1 วัดท้ายเมือง*</b></td>
-                <td>📺 ครุภัณฑ์โฆษณาและเผยแพร่</td>
-                <td>96,800</td>
-                <td><span class="badge badge-warning">📌 รับเพิ่ม 69</span></td>
-            </tr>
-            <tr class="row-card" data-status="issue">
-                <td><input type="checkbox" class="checkbox-custom"></td>
-                <td><b>🏫 รร.นครนนท์วิทยา 4 วัดบางแพรกเหนือ*</b></td>
-                <td>🗄️ ครุภัณฑ์สำนักงาน</td>
-                <td>1,169,117</td>
-                <td><span class="badge badge-warning">📌 รับเพิ่ม 69</span></td>
-            </tr>
-            <tr class="row-card" data-status="issue">
-                <td><input type="checkbox" class="checkbox-custom"></td>
-                <td><b>🏫 รร.กีฬานครนนท์วิทยา 6*</b></td>
-                <td>🏢 อาคารเพื่อประโยชน์อื่น</td>
-                <td style="color: #E63946; font-weight: 600;">-28,176</td>
-                <td><span class="badge badge-danger">⚠️ ปรับปรุง JV-00158/69</span></td>
-            </tr>
-            <tr class="row-card" data-status="ok">
-                <td><input type="checkbox" class="checkbox-custom" checked></td>
-                <td><b>👶 สพด.นครนนท์ 1 วัดท้ายเมือง</b></td>
-                <td>-</td>
-                <td>-</td>
-                <td><span class="badge badge-success">✅ ยอดตรงกัน</span></td>
-            </tr>
         </tbody>
     </table>
 </div>
 
 <script>
-    // Search Function
-    document.getElementById('searchInput').addEventListener('keyup', function() {
-        let value = this.value.toLowerCase();
-        let rows = document.querySelectorAll('#tableBody tr');
-        rows.forEach(row => {
-            let text = row.innerText.toLowerCase();
-            row.style.display = text.includes(value) ? '' : 'none';
-        });
-    });
+    const dataset = {"parent": [{"status_icon": "ü", "name": "ที่ดินที่มีกรรมสิทธิ์", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "name": "อาคารสำนักงาน", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "name": "อาคารเพื่อการพักอาศัย", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "name": "อาคารเพื่อประโยชน์อื่น", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "name": "ส่วนปรับปรุงอาคาร", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "name": "สิ่งปลูกสร้าง", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "name": "ครุภัณฑ์สำนักงาน", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "name": "ครุภัณฑ์ยานพาหนะและขนส่ง", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "name": "ครุภัณฑ์ไฟฟ้าและวิทยุ", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "name": "ครุภัณฑ์โฆษณาและเผยแพร่", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "name": "ครุภัณฑ์การเกษตร", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "name": "ครุภัณฑ์โรงงาน", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "name": "ครุภัณฑ์ก่อสร้าง", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "name": "ครุภัณฑ์สำรวจ", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "name": "ครุภัณฑ์วิทยาศาสตร์และการแพทย์", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "K", "name": "ครุภัณฑ์คอมพิวเตอร์*", "detail": "เครื่องพิมพ์รับบริจาคสน.การศึกษา", "amount": "32000", "note": "-"}, {"status_icon": "ü", "name": "ครุภัณฑ์งานบ้านงานครัว", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "name": "ครุภัณฑ์กีฬา", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "name": "ครุภัณฑ์ดนตรี", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "name": "ครุภัณฑ์สนาม", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "name": "ครุภัณฑ์ศึกษา", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "name": "ครุภัณฑ์อื่น", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "name": "ถนน", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "name": "สะพาน", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "name": "อ่างเก็บน้ำ", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "name": "สินทรัพย์โครงสร้างพื้นฐานอื่น", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "name": "โปรแกรมคอมพิวเตอร์", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "name": "อสังหาริมทรัพย์เพื่อการลงทุน - อาคาร", "detail": "-", "amount": "-", "note": "-"}], "sub": [{"status_icon": "K", "org_name": "โรงเรียนนครนนท์วิทยา 1 วัดท้ายเมือง*", "detail": "ครุภัณฑ์โฆษณาและเผยแพร่", "amount": "96800", "note": "รับเพิ่ม 69"}, {"status_icon": "", "org_name": "โรงเรียนนครนนท์วิทยา 1 วัดท้ายเมือง*", "detail": "ครุภัณฑ์สำนักงาน", "amount": "126100", "note": "รับเพิ่ม 69"}, {"status_icon": "", "org_name": "โรงเรียนนครนนท์วิทยา 1 วัดท้ายเมือง*", "detail": "ครุภัณฑ์งานบ้านงานครัว", "amount": "15000", "note": "รับเพิ่ม 69"}, {"status_icon": "", "org_name": "โรงเรียนนครนนท์วิทยา 1 วัดท้ายเมือง*", "detail": "ครุภัณฑ์ยานพาหนะและขนส่ง", "amount": "72500", "note": "รับเพิ่ม 69"}, {"status_icon": "K", "org_name": "โรงเรียนนครนนท์วิทยา 2 วัดทินกรนิมิต*", "detail": "ครุภัณฑ์สำนักงาน", "amount": "79300", "note": "รับเพิ่ม 69"}, {"status_icon": "", "org_name": "โรงเรียนนครนนท์วิทยา 2 วัดทินกรนิมิต*", "detail": "ครุภัณฑ์การศึกษา", "amount": "49900", "note": "รับเพิ่ม 69"}, {"status_icon": "", "org_name": "โรงเรียนนครนนท์วิทยา 2 วัดทินกรนิมิต*", "detail": "ครุภัณฑ์โฆษณาและเผยแพร่", "amount": "254800", "note": "รับเพิ่ม 69"}, {"status_icon": "K", "org_name": "โรงเรียนนครนนท์วิทยา 3 วัดนครอินทร์*", "detail": "ครุภัณฑ์โฆษณาและเผยแพร่", "amount": "255000", "note": "รับเพิ่ม 69"}, {"status_icon": "K", "org_name": "โรงเรียนนครนนท์วิทยา 4 วัดบางแพรกเหนือ*", "detail": "ครุภัณฑ์สำนักงาน", "amount": "1169117", "note": "รับเพิ่ม 69"}, {"status_icon": "", "org_name": "โรงเรียนนครนนท์วิทยา 4 วัดบางแพรกเหนือ*", "detail": "ครุภัณฑ์โรงงาน", "amount": "27900", "note": "รับเพิ่ม 69"}, {"status_icon": "", "org_name": "โรงเรียนนครนนท์วิทยา 4 วัดบางแพรกเหนือ*", "detail": "ครุภัณฑ์วิทยาศาสตร์และการแพทย์", "amount": "86400", "note": "รับเพิ่ม 69"}, {"status_icon": "", "org_name": "โรงเรียนนครนนท์วิทยา 4 วัดบางแพรกเหนือ*", "detail": "ครุภัณฑ์คอมพิวเตอร์", "amount": "145200", "note": "รับเพิ่ม 69"}, {"status_icon": "", "org_name": "โรงเรียนนครนนท์วิทยา 4 วัดบางแพรกเหนือ*", "detail": "ครุภัณฑ์งานบ้านงานครัว", "amount": "57000", "note": "รับเพิ่ม 69"}, {"status_icon": "", "org_name": "โรงเรียนนครนนท์วิทยา 4 วัดบางแพรกเหนือ*", "detail": "โปรแกรมคอมพิวเตอร์", "amount": "66000", "note": "รับเพิ่ม 69"}, {"status_icon": "ü", "org_name": "โรงเรียนนครนนท์วิทยา 5 ทานสัมฤทธิ์", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "K", "org_name": "โรงเรียนกีฬานครนนท์วิทยา 6*", "detail": "อาคารเพื่อประโยชน์อื่น", "amount": "-28176", "note": "ไม่เข้าเงื่อนไข 28176.499 ต้องปรับปรุงใบผ่าน JV-00158/69"}, {"status_icon": "", "org_name": "โรงเรียนกีฬานครนนท์วิทยา 6*", "detail": "ครุภัณฑ์สำนักงาน", "amount": "999709", "note": "รับเพิ่ม 69"}, {"status_icon": "", "org_name": "โรงเรียนกีฬานครนนท์วิทยา 6*", "detail": "ครุภัณฑ์ยานพาหนะและขนส่ง", "amount": "50900", "note": "รับเพิ่ม 69"}, {"status_icon": "", "org_name": "โรงเรียนกีฬานครนนท์วิทยา 6*", "detail": "ครุภัณฑ์คอมพิวเตอร์", "amount": "23200", "note": "รับเพิ่ม 69"}, {"status_icon": "", "org_name": "โรงเรียนกีฬานครนนท์วิทยา 6*", "detail": "ครุภัณฑ์งานบ้านงานครัว", "amount": "75400", "note": "รับเพิ่ม 69"}, {"status_icon": "", "org_name": "โรงเรียนกีฬานครนนท์วิทยา 6*", "detail": "โปรแกรมคอมพิวเตอร์", "amount": "11000", "note": "รับเพิ่ม 69"}, {"status_icon": "ü", "org_name": "ศูนย์พัฒนาเด็กเล็กนครนนท์ 1 วัดท้ายเมือง", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "org_name": "ศูนย์พัฒนาเด็กเล็กนครนนท์ 2 วัดฝาง", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "org_name": "ศูนย์พัฒนาเด็กเล็กนครนนท์ 3 วัดนครอินทร์", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "org_name": "ศูนย์พัฒนาเด็กเล็กนครนนท์ 4 ตำบลตลาดขวัญ", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "org_name": "ศูนย์พัฒนาเด็กเล็กนครนนท์ 5 ทานสัมฤทธิ์ ", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "org_name": "ศูนย์พัฒนาเด็กเล็กนครนนท์ 6 ตำบลบางเขน", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "org_name": "ศูนย์พัฒนาเด็กเล็กนครนนท์ 7 อนุราชประสิทธิ", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "org_name": "ศูนย์พัฒนาเด็กเล็กนครนนท์ 8 วัดทางหลวงโพธิ์ทอง", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "org_name": "ศูนย์พัฒนาเด็กเล็กนครนนท์ 9 กลาโหมอุทิศ", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "org_name": "ศูนย์พัฒนาเด็กเล็กนครนนท์ 10 โรงเรียนวัดบัวขวัญ", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "org_name": "ศูนย์พัฒนาเด็กเล็กนครนนท์ 11 ท่าทรายประชาอุปถัมภ์", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "org_name": "ศูนย์พัฒนาเด็กเล็กนครนนท์ 12 ประชานิเวศน์ 3", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "org_name": "ศูนย์บริการสาธารณสุข 1 (รัตนาธิเบศร์)", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "K", "org_name": "ศูนย์บริการสาธารณสุข 2 (ตำบลสวนใหญ่)*", "detail": "ครุภัณฑ์สำนักงาน", "amount": "204500", "note": "รับเพิ่ม 69"}, {"status_icon": "", "org_name": "ศูนย์บริการสาธารณสุข 2 (ตำบลสวนใหญ่)*", "detail": "ครุภัณฑ์วิทยาศาสตร์และการแพทย์", "amount": "310000", "note": "รับเพิ่ม 69"}, {"status_icon": "K", "org_name": "ศูนย์บริการสาธารณสุข 3 (แขวงท่าทราย)*", "detail": "ครุภัณฑ์สำนักงาน", "amount": "107100", "note": "รับเพิ่ม 69"}, {"status_icon": "", "org_name": "ศูนย์บริการสาธารณสุข 3 (แขวงท่าทราย)*", "detail": "ครุภัณฑ์ไฟฟ้าและวิทยุ", "amount": "12000", "note": "รับเพิ่ม 69"}, {"status_icon": "", "org_name": "ศูนย์บริการสาธารณสุข 3 (แขวงท่าทราย)*", "detail": "ครุภัณฑ์วิทยาศาสตร์และการแพทย์", "amount": "371100", "note": "รับเพิ่ม 69"}, {"status_icon": "", "org_name": "ศูนย์บริการสาธารณสุข 3 (แขวงท่าทราย)*", "detail": "ครุภัณฑ์งานบ้านงานครัว", "amount": "16990", "note": "รับเพิ่ม 69"}, {"status_icon": "ü", "org_name": "ศูนย์บริการสาธารณสุข 4 (วัดสมรโกฏิ)", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "org_name": "ศูนย์บริการสาธารณสุข 5 (ตำบลท่าทราย)", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "K", "org_name": "ศูนย์บริการสาธารณสุข 6 (สนามบินน้ำ)*", "detail": "ครุภัณฑ์สำนักงาน", "amount": "379080", "note": "รับเพิ่ม 69"}, {"status_icon": "", "org_name": "ศูนย์บริการสาธารณสุข 6 (สนามบินน้ำ)*", "detail": "ครุภัณฑ์โฆษณาและเผยแพร่", "amount": "139100", "note": "รับเพิ่ม 69"}, {"status_icon": "", "org_name": "ศูนย์บริการสาธารณสุข 6 (สนามบินน้ำ)*", "detail": "ครุภัณฑ์วิทยาศาสตร์และการแพทย์", "amount": "99800", "note": "รับเพิ่ม 69"}, {"status_icon": "", "org_name": "ศูนย์บริการสาธารณสุข 6 (สนามบินน้ำ)*", "detail": "ครุภัณฑ์งานบ้านงานครัว", "amount": "18500", "note": "รับเพิ่ม 69"}, {"status_icon": "K", "org_name": "ศูนย์บริการสาธารณสุข 7 (ตำบลตลาดขวัญ)*", "detail": "ครุภัณฑ์สำนักงาน", "amount": "18600", "note": "รับเพิ่ม 69"}, {"status_icon": "", "org_name": "ศูนย์บริการสาธารณสุข 7 (ตำบลตลาดขวัญ)*", "detail": "ครุภัณฑ์วิทยาศาสตร์และการแพทย์", "amount": "114000", "note": "รับเพิ่ม 69"}, {"status_icon": "K", "org_name": "ศูนย์บริการสาธารณสุข 8 (ตำบลบางเขน)*", "detail": "ครุภัณฑ์สำนักงาน", "amount": "18600", "note": "รับเพิ่ม 69"}, {"status_icon": "", "org_name": "ศูนย์บริการสาธารณสุข 8 (ตำบลบางเขน)*", "detail": "ครุภัณฑ์วิทยาศาสตร์และการแพทย์", "amount": "158800", "note": "รับเพิ่ม 69"}, {"status_icon": "ü", "org_name": "ศูนย์บริการสาธารณสุข 9 (ไขแสง  กำเนิดมี)", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "org_name": "ศูนย์บริการสาธารณสุข 10 (ทานสัมฤทธิ์)", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "org_name": "ศูนย์บริการสาธารณสุข 11 (ตำบลท่าทราย)", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "org_name": "สถาธนานุบาล 1", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "org_name": "สถาธนานุบาล 2", "detail": "-", "amount": "-", "note": "-"}, {"status_icon": "ü", "org_name": "สถาธนานุบาล 3", "detail": "-", "amount": "-", "note": "-"}]};
+    let currentTab = 'sub';
 
-    // Filter Function
-    function filterData(type) {
-        let buttons = document.querySelectorAll('.filter-btn');
-        buttons.forEach(btn => btn.classList.remove('active'));
-        event.target.classList.add('active');
+    function switchTab(tab) {
+        currentTab = tab;
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        if(tab === 'sub') document.querySelectorAll('.tab-btn')[0].classList.add('active');
+        else document.querySelectorAll('.tab-btn')[1].classList.add('active');
+        renderTable();
+    }
 
-        let rows = document.querySelectorAll('#tableBody tr');
-        rows.forEach(row => {
-            if (type === 'all') {
-                row.style.display = '';
-            } else if (type === 'issue') {
-                row.style.display = row.getAttribute('data-status') === 'issue' ? '' : 'none';
+    function formatNumber(numStr) {
+        if(numStr === '-' || !numStr) return '-';
+        let val = parseFloat(numStr);
+        if(isNaN(val)) return numStr;
+        return val.toLocaleString('th-TH');
+    }
+
+    function renderTable() {
+        const tbody = document.getElementById('tableBody');
+        tbody.innerHTML = '';
+        const data = dataset[currentTab];
+        const searchText = document.getElementById('searchInput').value.toLowerCase();
+
+        data.forEach(item => {
+            const name = currentTab === 'sub' ? item.org_name : item.name;
+            const textToSearch = (name + ' ' + item.detail + ' ' + item.note).toLowerCase();
+            
+            if (searchText && !textToSearch.includes(searchText)) return;
+
+            const tr = document.createElement('tr');
+            tr.className = 'row-card';
+
+            let badgeMarkup = '<span class="badge badge-success">✅ ยอดตรงกัน</span>';
+            if (item.note && item.note !== '-') {
+                if (item.note.includes('JV-') || item.amount.startsWith('-')) {
+                    badgeMarkup = `<span class="badge badge-danger">⚠️ ${item.note}</span>`;
+                } else {
+                    badgeMarkup = `<span class="badge badge-warning">📌 ${item.note}</span>`;
+                }
             }
+
+            tr.innerHTML = `
+                <td><input type="checkbox" class="checkbox-custom" ${item.status_icon === 'ü' ? 'checked' : ''}></td>
+                <td><b>${name}</b></td>
+                <td>${item.detail}</td>
+                <td style="${item.amount.startsWith('-') ? 'color: #E63946; font-weight: bold;' : ''}">${formatNumber(item.amount)}</td>
+                <td>${badgeMarkup}</td>
+            `;
+            tbody.appendChild(tr);
         });
     }
+
+    function filterData() {
+        renderTable();
+    }
+
+    renderTable();
 </script>
 
 </body>
